@@ -1,0 +1,7 @@
+python==2.7.18
+nose==1.1.2
+numpy<1.18.0
+scipy==0.13.3
+cython==0.27.3
+cvxopt==1.2.0
+future==0.16.0

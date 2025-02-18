@@ -1,0 +1,17 @@
+!new Bank('bank1')
+!bank1.country := 'Iceland'
+!bank1.name := 'Arctic Bank'
+!bank1.bic := 'ICELISRE'
+
+!new Person('person1')
+!person1.age := 19
+!person1.firstName := 'Anna'
+!person1.lastName := 'Bjornsdottir'
+
+!new Account('account1')
+!account1.iban := 'IS140159260076545510730339'
+!account1.balance := 1
+
+!insert (person1, account1) into Ownership
+!insert (person1, account1) into Use
+!insert (bank1, account1) into AccountOfBanks
