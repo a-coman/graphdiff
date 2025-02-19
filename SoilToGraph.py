@@ -12,7 +12,7 @@ def soilToGraph(text):
     entity_map = {}     # Maps entity names to their IDs and types
     node_labels = {}    # Stores node labels as {id: entity_type}
     edges = []          # Stores edges as [(edgei1, edgej1), (edgei2, edgej2), ...]
-    current_id = 0
+    entity_indice = 0   # Incremental id for entities
 
     regex_labels = r"!new\s+(\w+)\s*\(\s*'([^']+)'\s*\)"
     pattern_labels = re.compile(regex_labels)
@@ -27,12 +27,12 @@ def soilToGraph(text):
         if matcher_labels:
             entity_type = matcher_labels.group(1)
             entity_name = matcher_labels.group(2)
-            entity_map[entity_name] = Pair(current_id, entity_type)
+            entity_map[entity_name] = Pair(entity_indice, entity_type)
 
             # Add to node_labels dictionary
-            node_labels[current_id] = entity_type
+            node_labels[entity_indice] = entity_type
 
-            current_id += 1
+            entity_indice += 1
             continue
 
         if matcher_edges:
