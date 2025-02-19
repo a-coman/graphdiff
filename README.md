@@ -49,7 +49,8 @@ adj_matrix -> [[0, 1], [1, 0]]
 node_labels -> {0: 'Person', 1: 'Account'}
 ```
 
-``GraphDiff.py`` parses a .SOIL file to String, gets its graph representation using SoilToGraph, and computes graph similarities using GraKeL.
+#### ``GraphDiff.py`` 
+Parses a .SOIL file to String, gets its graph representation using SoilToGraph, and computes graph similarities using GraKeL.
 
 ## Installation
 Python 2 is required for GrakeL library.
