@@ -17,7 +17,7 @@ def soilToGraph(text):
     regex_labels = r"!new\s+(\w+)\s*\(\s*'([^']+)'\s*\)"
     pattern_labels = re.compile(regex_labels)
 
-    regex_edges = r"!insert\s+\(([^)]+)\)\s+into\s+\w+"
+    regex_edges = r"!insert\s*\(([^)]+)\)\s+into\s+\w+"
     pattern_edges = re.compile(regex_edges)
 
     for line in text.split("\n"):
