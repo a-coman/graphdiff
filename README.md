@@ -23,6 +23,10 @@ Converts edge lists tuples to adjacency matrices ***[2]***.
 #### ``SoilToGraph.py`` 
 Converts instances in USE (UML-based Specification Environment) [.SOIL] to graph representations.
 
+#### ``SoilToConnected.py`` 
+Helper function to parse an instance in the .SOIL format with disconnected intances (graphs) and return separate files for each conneted instance (graph), i.e., g1.soil, g2.soil, g3.soil, ...
+
+### Example
 Given an instance as the following:
 
 ```
@@ -64,7 +68,7 @@ pyenv activate graphdiff
 pip install -r requirements.txt
 ```
 
-## Credits
+## Attributions
 
 ***[1]*** **GraKeL Library**:
 https://ysig.github.io/GraKeL/0.1a8/documentation/introduction.html
