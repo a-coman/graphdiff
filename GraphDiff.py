@@ -1,15 +1,19 @@
-# Documentation:
-# https://github.com/ysig/GraKeL
-# https://ysig.github.io/GraKeL/0.1a8/documentation/introduction.html
+"""
+Get graph from adjacency matrix and node labels
+    Graphs are represented as adjacency matrices with labels to check
+    both structural difference and semantic information from labels
+
+Documentation:
+    https://github.com/ysig/GraKeL
+    https://ysig.github.io/GraKeL/0.1a8/documentation/introduction.html
+"""
 
 import SoilToGraph
 from grakel.kernels import ShortestPath
 from grakel.kernels import WeisfeilerLehman, VertexHistogram
 from grakel import Graph
 
-# Get graph from adjacency matrix and node labels
-    # Graphs represented as adjacency matrices, with labels to check
-    # both structural difference and semantic information encoded in the labels  
+ 
 def getGraph(adj, labels):
     return Graph(initialization_object=adj, node_labels=labels)
 
