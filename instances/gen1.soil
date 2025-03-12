@@ -1,0 +1,129 @@
+-- Instance 1
+!new Bank('bank1')
+!bank1.country := 'USA'
+!bank1.name := 'Chase'
+!bank1.bic := 'CHASUS33XXX'
+
+!new Account('account1')
+!account1.iban := 'US12345678901234567890'
+!account1.balance := 1000
+
+!new Person('person1')
+!person1.firstName := 'Alice'
+!person1.lastName := 'Smith'
+!person1.age := 25
+
+!insert (person1, account1) into Ownership
+!insert (person1, account1) into Use
+!insert (bank1, account1) into AccountOfBanks
+
+-- Instance 2
+!new Bank('bank2')
+!bank2.country := 'UK'
+!bank2.name := 'Barclays'
+!bank2.bic := 'BARCGB22XXX'
+
+!new Account('account2')
+!account2.iban := 'GB29NWBK60161331926819'
+!account2.balance := 5000
+
+!new Person('person2')
+!person2.firstName := 'Bob'
+!person2.lastName := 'Johnson'
+!person2.age := 30
+
+!insert (person2, account2) into Ownership
+!insert (person2, account2) into Use
+!insert (bank2, account2) into AccountOfBanks
+
+!new Account('account3')
+!account3.iban := 'GB29NWBK60161331926820'
+!account3.balance := 2000
+
+!insert (person2, account3) into Use
+!insert (bank2, account3) into AccountOfBanks
+
+-- Instance 3: Multiple accounts for one person and one bank
+!new Person('person3')
+!person3.firstName := 'Charlie'
+!person3.lastName := 'Brown'
+!person3.age := 40
+
+!new Account('account4')
+!account4.iban := 'CA000123456789012345'
+!account4.balance := 7500
+
+!insert (person3, account4) into Ownership
+!insert (person3, account4) into Use
+!insert (bank2, account4) into AccountOfBanks
+
+!new Account('account5')
+!account5.iban := 'CA000123456789012346'
+!account5.balance := 10000
+
+!insert (person3, account5) into Ownership
+!insert (person3, account5) into Use
+!insert (bank2, account5) into AccountOfBanks
+
+-- Instance 4: Corner cases, invalid balance
+!new Bank('bank3')
+!bank3.country := 'France'
+!bank3.name := 'BNP Paribas'
+!bank3.bic := 'BNPAFRPPXXX'
+
+!new Account('account6')
+!account6.iban := 'FR7630004000700000766800086'
+!account6.balance := 1
+
+!new Person('person4')
+!person4.firstName := 'David'
+!person4.lastName := 'Lee'
+!person4.age := 20
+
+!insert (person4, account6) into Ownership
+!insert (person4, account6) into Use
+!insert (bank3, account6) into AccountOfBanks
+
+-- Instance 5: Another bank, single account, multiple users
+!new Bank('bank4')
+!bank4.country := 'Japan'
+!bank4.name := 'MUFG Bank'
+!bank4.bic := 'BOTKJPJTXXX'
+
+!new Account('account7')
+!account7.iban := 'JP12123456789012345678'
+!account7.balance := 100000
+
+!new Person('person5')
+!person5.firstName := 'Emi'
+!person5.lastName := 'Tanaka'
+!person5.age := 35
+
+!new Person('person6')
+!person6.firstName := 'Kenji'
+!person6.lastName := 'Sato'
+!person6.age := 28
+
+!insert (person5, account7) into Ownership
+!insert (person5, account7) into Use
+!insert (person6, account7) into Use
+!insert (bank4, account7) into AccountOfBanks
+
+-- Instance 6: Corner cases, invalid owner age
+!new Bank('bank5')
+!bank5.country := 'Australia'
+!bank5.name := 'Commonwealth Bank'
+!bank5.bic := 'CTBAAU2SXXX'
+
+!new Account('account8')
+!account8.iban := 'AU61082050012345678901'
+!account8.balance := 100
+
+!new Person('person7')
+!person7.firstName := 'Oliver'
+!person7.lastName := 'Williams'
+!person7.age := 19
+
+!insert (person7, account8) into Ownership
+!insert (person7, account8) into Use
+!insert (bank5, account8) into AccountOfBanks

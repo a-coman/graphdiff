@@ -1,13 +1,19 @@
+"""
+Parse an instance in the .SOIL format and return its graph representation, i.e., adgency_matrix, node_labels, and edges.
+adgency_matrix, node_labels, edges = SoilToGraph.soilToGraph(text)
+"""
+
 import re
 import EdgeToAdjacency
 
 class Pair(object):
+    """Entity pair with incremental ID and type, e.g. 0 - Bank"""
     def __init__(self, id, type):
         self.id = id
         self.type = type
 
-# Function to convert an instance in the SOIL (USE format) to a graph
 def soilToGraph(text):
+    """Parse an instance in the .SOIL format and return its graph representation, i.e., adgency_matrix, node_labels, and edges."""
 
     entity_map = {}     # Maps entity names to their IDs and types
     node_labels = {}    # Stores node labels as {id: entity_type}
@@ -54,7 +60,7 @@ def soilToGraph(text):
     return adgency_matrix, node_labels, edges
 
 
-
+# Main for testing purposes
 if __name__ == "__main__":
     text = """
     !new Bank('bank2')
@@ -87,6 +93,11 @@ if __name__ == "__main__":
     !insert (person3, account3) into Use
     !insert (bank2, account2) into AccountOfBanks
     !insert (bank2, account3) into AccountOfBanks
+
+    !new Bank('bank2')
+    !bank2.country := 'India'
+    !bank2.name := 'Bharat Bank'
+    !bank2.bic := 'INBBINBB'
     """
 
     adgency_matrix, node_labels, edges = soilToGraph(text)

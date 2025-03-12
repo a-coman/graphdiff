@@ -17,6 +17,36 @@ def readFile(file_path):
     with open(file_path, 'r') as file:
         return file.read()
 
+def saveFile(content, filename):
+    with open(filename, "w") as file:
+        file.write(content)
+
+
+def array_to_markdown_table(matrix):
+    # Create the header row
+    header = "|       | " + " | ".join(["gen{}".format(i+1) for i in range(len(matrix[0]))]) + " |"
+    
+    # Create the separator row
+    separator = "|-------|" + "|".join(["---"] * len(matrix[0])) + "|"
+    
+    # Create the data rows
+    data_rows = []
+    for i, row in enumerate(matrix):
+        data_row = ["**gen{}**".format(i+1)]  # Add row name
+        for j, cell in enumerate(row):
+            if j >= i:  # Include diagonal and upper triangle
+                data_row.append("{:.6f}".format(cell))
+            else:  # Leave lower triangle empty
+                data_row.append("")
+        data_row = "| " + " | ".join(data_row) + " |"
+        data_rows.append(data_row)
+    
+    # Combine all rows into the final Markdown table
+    markdown_table = "\n".join([header, separator] + data_rows)
+    
+    return markdown_table 
+
+
 if __name__ == "__main__":
     # Initialize Graph Kernel
     sp_kernel = ShortestPath(normalize=True)
@@ -24,30 +54,37 @@ if __name__ == "__main__":
     # Initialize Weisfeiler-Lehman framework
     wl_kernel = WeisfeilerLehman(base_graph_kernel=VertexHistogram)
 
-    example1 = readFile("example1.soil")
-    example2 = readFile("example2.soil")
+    numberGraphs = 2
+    graphs = []
+    #filepath = "/mnt/c/Users/Andrei/Desktop/Experiments-Bank-Bikes-01/Bikes/Simple-GPT4o--27-02-2025--10-09-19/"
+    filepath = "./instances/"
 
-    adj1, labels1, edges1 = SoilToGraph.soilToGraph(example1)
-    adj2, labels2, edges2 = SoilToGraph.soilToGraph(example2)
+    result = []
+    result.append("# Adj, edge, label \n```\n")
 
-    print("Adj1: ")
-    print(adj1)
-    print("Labels1: ")
-    print(labels1)
-    print("Edges1: ")
-    print(edges1)
+    for i in range(1, numberGraphs + 1):
+        file = readFile(filepath + "gen" + str(i) + ".soil")
+        adj, labels, edges = SoilToGraph.soilToGraph(file)
+        result.append("Adj" + str(i) + ": ")
+        result.append(str(adj))
+        result.append("\n\n")
+        result.append("Labels" + str(i) + ": ")
+        result.append(str(labels))
+        result.append("\n\n")
+        result.append("Edges" + str(i) + ": ")
+        result.append(str(edges))
+        graph = getGraph(adj, labels)
+        graphs.append(graph)
 
-    print("Adj2: ")
-    print(adj2)
-    print("Labels2: ")
-    print(labels2)
-    print("Edges2: ")
-    print(edges2)
+    result.append("\n```\n")
+    kernel = sp_kernel.fit_transform(graphs)
+    result.append("# Kernel: \n```\n")
+    result.append(str(kernel))
+    result.append("\n```\n")
+    result.append("# Kernel 2D table: \n")
+    markdown = array_to_markdown_table(kernel)
+    result.append(markdown)
 
-    graph1 = getGraph(adj1, labels1)
-    graph2 = getGraph(adj2, labels2)
-
-    # Compute the kernel (similarity) between the two graphs
-    kernel = sp_kernel.fit_transform([graph1, graph2])
-    print("Kernel: ")
-    print(kernel)
+    result = "".join(result)
+    saveFile(result, "./Grakel.md")
+    print(result)

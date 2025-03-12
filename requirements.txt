@@ -1,3 +1,4 @@
+grakel==0.1.8
 python==2.7.18
 nose==1.1.2
 numpy<1.18.0
