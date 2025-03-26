@@ -1,0 +1,29 @@
+!new Bank('northernFinance')
+!northernFinance.country := 'Estonia'
+!northernFinance.name := 'Northern Finance'
+!northernFinance.bic := 'NFINEST2'
+
+!new Person('eeva')
+!eeva.firstName := 'Eeva'
+!eeva.lastName := 'Makela'
+!eeva.age := 18
+
+!new Person('martti')
+!martti.firstName := 'Martti'
+!martti.lastName := 'Virtanen'
+!martti.age := 18
+
+!new Account('account1')
+!account1.iban := 'EE1234567890123456'
+!account1.balance := 0
+
+!new Account('account2')
+!account2.iban := 'EE6543210987654321'
+!account2.balance := 1000000
+
+!insert (eeva, account1) into Ownership
+!insert (martti, account1) into Ownership
+!insert (martti, account2) into Ownership
+
+!insert (northernFinance, account1) into AccountOfBanks
+!insert (northernFinance, account2) into AccountOfBanks

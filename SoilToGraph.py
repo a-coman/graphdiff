@@ -20,10 +20,10 @@ def soilToGraph(text):
     edges = []          # Stores edges as [(edgei1, edgej1), (edgei2, edgej2), ...]
     entity_indice = 0   # Incremental id for entities
 
-    regex_labels = r"!new\s+(\w+)\s*\(\s*'([^']+)'\s*\)"
+    regex_labels = r"!\s*new\s+(\w+)\s*\(\s*'([^']+)'\s*\)"
     pattern_labels = re.compile(regex_labels)
 
-    regex_edges = r"!insert\s*\(([^)]+)\)\s+into\s+\w+"
+    regex_edges = r"!\s*insert\s*\(([^)]+)\)\s+into\s+\w+"
     pattern_edges = re.compile(regex_edges)
 
     for line in text.split("\n"):
@@ -54,9 +54,12 @@ def soilToGraph(text):
             # Add to edges list
             edges.append((edgei, edgej))
 
+    # Print
+    for entity_name, pair in entity_map.items():
+        print("Entity Name: {}, ID: {}, Type: {}".format(entity_name, pair.id, pair.type))
+    
     # Results
     adgency_matrix = EdgeToAdjacency.convert_to_adjacency_matrix(edges, len(node_labels))
-    
     return adgency_matrix, node_labels, edges
 
 
