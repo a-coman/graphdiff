@@ -17,11 +17,11 @@ def convert_to_adjacency_matrix(edge_list, num_vertices):
         destination = edge[1]
         
         # Mark the edge between source and destination in adjacency matrix
-        adj_mat[source][destination] = 1
+        adj_mat[source][destination] += 1
         
         #  Mark the edge between destination and source in adjacency matrix
         # (since the graph is bidirectional)
-        adj_mat[destination][source] = 1
+        adj_mat[destination][source] += 1
     
     return adj_mat
 

@@ -98,7 +98,7 @@ if __name__ == "__main__":
             graphs.append(graph)
 
     result.append("```\n")
-    kernel = sp_kernel.fit_transform(graphs)
+    kernel = sp_kernel.fit_transform(graphs) # TODO: Check if sp_kernel takes weights into account
     result.append("# Kernel: \n```\n")
     result.append(str(kernel))
     result.append("\n```\n")
