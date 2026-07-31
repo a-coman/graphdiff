@@ -17,6 +17,22 @@ G = Graph(adj, node_labels=node_labels)
 
 ## Usage
 
+### Process a complete dataset
+
+`main.py` recursively finds experiment directories containing `gen1`, `gen2`,
+and similar generation folders. It writes a `grakel.md` result inside every
+experiment directory.
+
+```bash
+python main.py --dataset /Users/andrei/Repos/llm-viewer/public/data/dataset/GPT_5_2
+```
+
+Preview the experiment directories without processing or writing files:
+
+```bash
+python main.py --dry-run /Users/andrei/Repos/llm-viewer/public/data/dataset/GPT_5_2
+```
+
 #### ``EdgeToAdjacency.py`` 
 Converts edge lists tuples to adjacency matrices ***[2]***.
 
