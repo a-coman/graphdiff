@@ -21,7 +21,8 @@ G = Graph(adj, node_labels=node_labels)
 
 `main.py` recursively finds experiment directories containing `gen1`, `gen2`,
 and similar generation folders. It writes a `grakel.md` result inside every
-experiment directory.
+experiment directory. Each report contains both the normalized kernel
+similarity and normalized dissimilarity (`sqrt(1 - similarity)`) matrices.
 
 ```bash
 python main.py --dataset /Users/andrei/Repos/llm-viewer/public/data/dataset/GPT_5_2

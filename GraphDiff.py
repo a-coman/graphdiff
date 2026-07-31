@@ -12,6 +12,7 @@ import SoilToGraph
 from grakel.kernels import ShortestPath
 from grakel.kernels import WeisfeilerLehman, VertexHistogram
 from grakel import Graph
+import numpy as np
 import os
 
  
@@ -25,6 +26,11 @@ def readFile(file_path):
 def saveFile(content, filename):
     with open(filename, "w") as file:
         file.write(content)
+
+
+def normalized_dissimilarity(similarity):
+    """Convert a normalized, non-negative kernel matrix to distances in [0, 1]."""
+    return np.sqrt(np.clip(1.0 - similarity, 0.0, 1.0))
 
 
 def array_to_markdown_table(matrix, items):
@@ -105,6 +111,12 @@ if __name__ == "__main__":
     result.append("# Kernel 2D table: \n")
     markdown = array_to_markdown_table(kernel, processedItems)
     result.append(markdown)
+    dissimilarity = normalized_dissimilarity(kernel)
+    result.append("\n# Normalized dissimilarity: \n```\n")
+    result.append(str(dissimilarity))
+    result.append("\n```\n")
+    result.append("# Normalized dissimilarity 2D table: \n")
+    result.append(array_to_markdown_table(dissimilarity, processedItems))
 
     result = "".join(result)
     saveFile(result, filepath + "grakel.md")

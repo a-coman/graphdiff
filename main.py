@@ -85,6 +85,7 @@ def array_to_markdown_table(matrix, names):
 
 def process_experiment(experiment_path, output_name):
     # Import here so discovery and --dry-run work before dependencies are installed.
+    import numpy as np
     from grakel import Graph
     from grakel.kernels import ShortestPath
 
@@ -127,12 +128,17 @@ def process_experiment(experiment_path, output_name):
         raise ValueError("no eligible .soil files found")
 
     kernel = ShortestPath(normalize=True).fit_transform(graphs)
+    dissimilarity = np.sqrt(np.clip(1.0 - kernel, 0.0, 1.0))
     result.extend(
         [
             "```\n# Kernel:\n```\n",
             str(kernel),
             "\n```\n# Kernel 2D table:\n",
             array_to_markdown_table(kernel, graph_names),
+            "\n# Normalized dissimilarity:\n```\n",
+            str(dissimilarity),
+            "\n```\n# Normalized dissimilarity 2D table:\n",
+            array_to_markdown_table(dissimilarity, graph_names),
             "\n",
         ]
     )
