@@ -1,4 +1,8 @@
 # graphdiff
+**Paper**: "LLM-based Generation of Realistic and Diverse Domain Model Instances". [ArXiv Preprint](https://arxiv.org/pdf/2604.10350)
+
+**Repository**: Main repository with examples [instagen](https://github.com/a-coman/instagen)
+
 This repository provides tools for converting instances in USE (UML-based Specification Environment) [.SOIL] to graph representations and compute graph kernels for similarity analysis. It convert edge lists representation of graphs to adjacency matrices, create a graph representation from instances in the USE environment (.SOIL), and compute graph similarities using GraKeL.
 
 ## Background
@@ -93,3 +97,6 @@ https://github.com/ysig/GraKeL
 
 ***[2]*** **Converting edge list to adjacency matrix**:
 https://youcademy.org/conversion-between-edge-list-adjacency-matrix/#:~:text=To%20convert%20from%20an%20edge,the%20edge%2C%20if%20applicable
+
+## License
+**graphdiff** is licensed under the **MIT License** (see `LICENSE` in this repo). graphdiff uses libraries from third parties (such as GraKeL, NumPy, and SciPy), each under its own license. See `requirements.txt` for the full list of dependencies.
