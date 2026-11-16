@@ -25,8 +25,8 @@ G = Graph(adj, node_labels=node_labels)
 
 `main.py` recursively finds experiment directories containing `gen1`, `gen2`,
 and similar generation folders. It writes a `grakel.md` result inside every
-experiment directory. Each report contains both the normalized kernel
-similarity and normalized dissimilarity (`sqrt(1 - similarity)`) matrices.
+experiment directory. Each report contains both the normalized shortest-path
+kernel similarity and normalized dissimilarity (`sqrt(1 - similarity)`) matrices.
 
 ```bash
 python main.py --dataset /Users/andrei/Repos/llm-viewer/public/data/dataset/GPT_5_2
@@ -75,7 +75,7 @@ node_labels -> {0: 'Person', 1: 'Account'}
 ```
 
 #### ``GraphDiff.py`` 
-Parses a .SOIL file to String, gets its graph representation using SoilToGraph, and computes graph similarities using GraKeL.
+Parses a .SOIL file to String, gets its graph representation using SoilToGraph, and computes graph similarities with the shortest-path kernel of GraKeL.
 
 ## Installation
 Python 2 is required for GrakeL library.
